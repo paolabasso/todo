@@ -1,27 +1,50 @@
-console.log("Vai inter!");
-console.info("Vai inter!");
-console.error("Vai Inter!");
-console.warn("Vai Inter!");
+//export { addTask, removeTask, updateTask, getTaskId } from './utils/domFunctions';
 
-// ###########################################
- const nome = "Paola Basso";
+const db = [
 
- let email = "paolasbasso@gmail.com"
+    {
+        id: 1,
+        title:'Concluir Site do ChatBot',
+        steps: [
+            {step: 'Finalizar design'},
+            {step: 'Desenvolver telas'},
+        ],
+        done: false,
+        dueDate:'2022-05-06',
+        reminder: '2022-05-02 10:00',
+    },
 
- console.log(`Nome: ${nome} Email: ${email}`);
+    {
+        id: 2,
+        title:'Aula de Python',
+        steps: [
+            {step: 'Fazer  aula 1'},
+            {step: 'Fazer aula 2'},
+            {step: 'Fazer aula 3'},
+        ],
+        done: false,
+        dueDate:'2022-06-06',
+        reminder: '2022-06-02 10:00',
+    }
+]
 
-// ###########################################
+console.log(db[0].title);
 
-if (nome == "Paola Basso") {
-    console.log("é igual");
-}
+const newTask = document.querySelector('#inputTxtNewTask');
+const form = document.querySelector("#addNewTask");
+form.addEventListener("submit",(e) => {
+    e.preventDefault();
+});
 
+newTask.addEventListener("keyup",(e)=>{
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.key == "Enter") {
+        alert(newTask.value);
 
+        db.push({  id: Number(db.length) +1, title: newTask.value });
 
-escreve(`Seja bem-vindo ${nome}`);
-escreve("Treinamento HTML5, CSS3 e JS");
-
-
-function escreve(x) {
-    console.log("Frase: " + x);
-}
+        newTask.value = "";
+        console.log(db);
+    }
+});
