@@ -1,4 +1,4 @@
-//export { addTask, removeTask, updateTask, getTaskId } from './utils/domFunctions';
+import { addTask, getAllTasks } from './utils/domFunctions.js';
 
 const db = [
 
@@ -28,6 +28,8 @@ const db = [
     }
 ]
 
+getAllTasks(db);
+
 console.log(db[0].title);
 
 const newTask = document.querySelector('#inputTxtNewTask');
@@ -39,12 +41,20 @@ form.addEventListener("submit",(e) => {
 newTask.addEventListener("keyup",(e)=>{
     e.preventDefault();
     e.stopPropagation();
-    if (e.key == "Enter") {
-        alert(newTask.value);
+    if (e.key == "Enter" && newTask.value) {
+            alert(newTask.value);
 
-        db.push({  id: Number(db.length) +1, title: newTask.value });
-
-        newTask.value = "";
-        console.log(db);
-    }
+            const d = new Date();
+            const today = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+    
+            db.push({  
+                id: Number(db.length) +1, 
+                title: newTask.value,
+                 done: false, 
+                dueDate: today, });
+            addTask(newTask.title);
+            newTask.value = "";
+            console.log(db);
+            
+        }
 });
