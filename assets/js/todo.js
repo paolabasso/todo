@@ -42,19 +42,25 @@ newTask.addEventListener("keyup",(e)=>{
     e.preventDefault();
     e.stopPropagation();
     if (e.key == "Enter" && newTask.value) {
-            alert(newTask.value);
+            // alert(newTask.value);
 
             const d = new Date();
             const today = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
-    
-            db.push({  
+            
+            const task = {  
                 id: Number(db.length) +1, 
                 title: newTask.value,
-                 done: false, 
-                dueDate: today, });
-            addTask(newTask.title);
+                done: false, 
+                dueDate: today,
+            };
+            db.push(task);
+            // document.querySelector(".tasks").innerHTML = "";
+            // getAllTasks(db);
+
+            addTask(task);
             newTask.value = "";
             console.log(db);
+            
             
         }
 });

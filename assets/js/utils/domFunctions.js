@@ -1,15 +1,18 @@
-export  function addTask(db, title = "") {
+export  function addTask(taskParam) {
     const task = document.createElement('div');
-    const id = Number(db.length) + 1;
     task.classList.add('task');
-    task.setAttribute('id', id);
+    task.setAttribute('id', taskParam.id);
 
     const taskBody = `
-    <div> <input type="checkbox" id="check_${id}"/></div>
+    <div> <input type="checkbox" id="check_${taskParam.id}"/>
+    </div>
                 <div>
-                    <div><span class="title-task">${
-                        title ? title : db.title
-                    }</span></div>
+                    <div><span class="title-task">${taskParam.title}</span></div>
+                    <div class="information-task">
+                        <ul>
+                            <li class="dueDate">${taskParam.dueDate}</li>
+                        </ul>
+                    </div> 
                 </div>
                 <div>Star</div>
     `;
